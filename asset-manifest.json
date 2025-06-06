@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/ArunEswarramurthy/ECE-DEPARTMENT/static/css/main.03448e77.css",
+    "main.js": "/ArunEswarramurthy/ECE-DEPARTMENT/static/js/main.62badf9c.js",
+    "static/js/239.0748d04e.chunk.js": "/ArunEswarramurthy/ECE-DEPARTMENT/static/js/239.0748d04e.chunk.js",
+    "static/js/977.f560f5fb.chunk.js": "/ArunEswarramurthy/ECE-DEPARTMENT/static/js/977.f560f5fb.chunk.js",
+    "static/js/455.4f18e9f0.chunk.js": "/ArunEswarramurthy/ECE-DEPARTMENT/static/js/455.4f18e9f0.chunk.js",
+    "static/js/453.368a30b5.chunk.js": "/ArunEswarramurthy/ECE-DEPARTMENT/static/js/453.368a30b5.chunk.js",
+    "index.html": "/ArunEswarramurthy/ECE-DEPARTMENT/index.html",
+    "static/media/ECE.svg": "/ArunEswarramurthy/ECE-DEPARTMENT/static/media/ECE.4899df5e8bb4ddcf527ce261e6cdcb8b.svg",
+    "main.03448e77.css.map": "/ArunEswarramurthy/ECE-DEPARTMENT/static/css/main.03448e77.css.map",
+    "main.62badf9c.js.map": "/ArunEswarramurthy/ECE-DEPARTMENT/static/js/main.62badf9c.js.map",
+    "239.0748d04e.chunk.js.map": "/ArunEswarramurthy/ECE-DEPARTMENT/static/js/239.0748d04e.chunk.js.map",
+    "977.f560f5fb.chunk.js.map": "/ArunEswarramurthy/ECE-DEPARTMENT/static/js/977.f560f5fb.chunk.js.map",
+    "455.4f18e9f0.chunk.js.map": "/ArunEswarramurthy/ECE-DEPARTMENT/static/js/455.4f18e9f0.chunk.js.map",
+    "453.368a30b5.chunk.js.map": "/ArunEswarramurthy/ECE-DEPARTMENT/static/js/453.368a30b5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.03448e77.css",
+    "static/js/main.62badf9c.js"
+  ]
+}
