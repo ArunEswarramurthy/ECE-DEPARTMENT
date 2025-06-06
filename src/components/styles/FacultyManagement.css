@@ -1,0 +1,363 @@
+.faculty-management {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.faculty-management h1 {
+  color: #17252A;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.faculty-management h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: #3AAFA9;
+}
+
+.faculty-management h2 {
+  color: #2B7A78;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-card {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
+.faculty-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.faculty-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.faculty-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.faculty-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2B7A78;
+  color: white;
+  padding: 1rem;
+}
+
+.faculty-header h3 {
+  margin: 0;
+  color: white;
+}
+
+.faculty-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.faculty-details {
+  display: flex;
+  padding: 0;
+}
+
+.faculty-image-container {
+  width: 120px;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #DEF2F1;
+}
+
+.faculty-image-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #3AAFA9;
+}
+
+.faculty-image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder-image {
+  width: 100%;
+  height: 100%;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+}
+
+.faculty-info {
+  flex: 1;
+  padding: 1rem;
+}
+
+.faculty-info p {
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.faculty-info p strong {
+  min-width: 120px;
+  color: #17252A;
+}
+
+.file-upload-container {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.file-input {
+  padding: 0.8rem;
+  border: 2px dashed #DEF2F1;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.file-input:hover {
+  border-color: #3AAFA9;
+}
+
+.selected-file {
+  display: flex;
+  align-items: center;
+  background: #f0f0f0;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+.preview-image-container {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+  border: 2px solid #3AAFA9;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.success-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 4px;
+  border-left: 4px solid #28a745;
+  text-align: center;
+}
+
+.form-text {
+  display: block;
+  margin-top: 0.25rem;
+  color: #666;
+  font-size: 0.875rem;
+}
+
+/* Subjects handling styles */
+.subjects-input-container {
+  margin-bottom: 1rem;
+}
+
+.subject-inputs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+
+.subject-input {
+  flex: 1;
+}
+
+.add-subject-btn {
+  padding: 0.5rem 1rem;
+  height: 38px;
+}
+
+.subjects-list {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.subjects-list h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #2B7A78;
+  font-size: 1rem;
+}
+
+.subjects-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.subjects-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.subjects-list li:last-child {
+  border-bottom: none;
+}
+
+.btn-remove {
+  background: none;
+  border: none;
+  color: #ff5252;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.btn-remove:hover {
+  color: #ff0000;
+}
+
+/* New styles for improved faculty list */
+.admin-faculty-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+.admin-faculty-card {
+  width: 280px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.admin-faculty-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.admin-faculty-banner {
+  height: 80px;
+  background: #3AAFA9;
+  position: relative;
+}
+
+.admin-faculty-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  transform: translateX(-50%);
+  background: white;
+}
+
+.admin-faculty-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.admin-faculty-content {
+  padding: 60px 1.5rem 1.5rem;
+  text-align: center;
+}
+
+.admin-faculty-name {
+  color: #17252A;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.admin-faculty-designation {
+  color: #3AAFA9;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.admin-faculty-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .faculty-list, .admin-faculty-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .faculty-details {
+    flex-direction: column;
+  }
+  
+  .faculty-image-container {
+    width: 100%;
+  }
+  
+  .admin-faculty-card {
+    width: 100%;
+  }
+  
+  .subject-inputs {
+    flex-direction: column;
+  }
+  
+  .add-subject-btn {
+    width: 100%;
+  }
+}

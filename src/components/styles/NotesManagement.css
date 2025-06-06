@@ -1,0 +1,124 @@
+.notes-management {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.notes-management h1, .notes-management h2 {
+  color: #17252A;
+  margin-bottom: 1.5rem;
+}
+
+.notes-management h1 {
+  text-align: center;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.notes-management h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: #FFA500;
+}
+
+.file-upload-container {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.file-input {
+  padding: 0.8rem;
+  border: 2px dashed #DEF2F1;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.file-input:hover {
+  border-color: #3AAFA9;
+}
+
+.file-types {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.3rem;
+}
+
+.selected-file {
+  display: flex;
+  align-items: center;
+  background: #f0f0f0;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+.file-icon {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.file-name {
+  font-weight: 500;
+  margin-right: 0.5rem;
+  word-break: break-all;
+}
+
+.file-type {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.notes-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #3AAFA9;
+  color: white;
+  padding: 1rem;
+  border-radius: 8px 8px 0 0;
+}
+
+.note-header h3 {
+  margin: 0;
+  color: white;
+}
+
+.note-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.note-details {
+  padding: 1.5rem;
+}
+
+.note-file {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.note-file .btn {
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .notes-list {
+    grid-template-columns: 1fr;
+  }
+}
