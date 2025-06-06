@@ -1,78 +1,105 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import '../styles/Navbar.css';
-import defaultLogo from '../../logo/ECE.svg';
+import { Link } from 'react-router-dom';
+import './Navbar.css';
 
 const Navbar = () => {
-  const navigate = useNavigate();
-  const isAdmin = localStorage.getItem('isAdmin') === 'true';
-  const [menuActive, setMenuActive] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [logo, setLogo] = useState(defaultLogo);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [siteName, setSiteName] = useState('ECE Department Portal');
+  const [logo, setLogo] = useState(null);
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    // Load custom logo and site name if available
-    const storedLogo = localStorage.getItem('siteLogo');
+    // Check if user is logged in as admin
+    const adminStatus = localStorage.getItem('isAdmin') === 'true';
+    setIsAdmin(adminStatus);
+    
+    // Load site name from localStorage if available
     const storedName = localStorage.getItem('siteName');
-    
-    if (storedLogo) {
-      setLogo(storedLogo);
-    }
-    
     if (storedName) {
       setSiteName(storedName);
     }
+    
+    // Load logo from localStorage if available
+    const storedLogo = localStorage.getItem('siteLogo');
+    if (storedLogo) {
+      setLogo(storedLogo);
+    }
   }, []);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('isAdmin');
-    navigate('/');
-  };
-
-  const toggleMenu = () => {
-    setMenuActive(!menuActive);
+    setIsAdmin(false);
+    // Close menu after logout
+    setIsOpen(false);
   };
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <img src={logo} alt="Logo" height="40" />
-          {siteName}
+          {logo ? (
+            <img src={logo} alt={siteName} className="site-logo" />
+          ) : (
+            <span className="logo-text">ECE</span>
+          )}
+          <span className="site-name">{siteName}</span>
         </Link>
-        
-        <button className="navbar-toggle" onClick={toggleMenu}>
-          ☰
-        </button>
-        
-        <div className={`navbar-menu ${menuActive ? 'active' : ''}`}>
-          <Link to="/" className="navbar-item" onClick={() => setMenuActive(false)}>Home</Link>
-          <Link to="/faculty" className="navbar-item" onClick={() => setMenuActive(false)}>Faculty</Link>
-          <Link to="/feedback" className="navbar-item" onClick={() => setMenuActive(false)}>Feedback</Link>
-          <Link to="/notes" className="navbar-item" onClick={() => setMenuActive(false)}>Notes</Link>
-          <Link to="/achievements" className="navbar-item" onClick={() => setMenuActive(false)}>Achievements</Link>
-          
+
+        <div className="menu-icon" onClick={toggleMenu}>
+          <i className={isOpen ? 'fas fa-times' : 'fas fa-bars'}></i>
+        </div>
+
+        <ul className={isOpen ? 'nav-menu active' : 'nav-menu'}>
+          <li className="nav-item">
+            <Link to="/" className="nav-link" onClick={() => setIsOpen(false)}>
+              Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/faculty" className="nav-link" onClick={() => setIsOpen(false)}>
+              Faculty
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/feedback" className="nav-link" onClick={() => setIsOpen(false)}>
+              Feedback
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/notes" className="nav-link" onClick={() => setIsOpen(false)}>
+              Notes
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/achievements" className="nav-link" onClick={() => setIsOpen(false)}>
+              Achievements
+            </Link>
+          </li>
           {isAdmin ? (
             <>
-              <Link to="/admin/dashboard" className="navbar-item" onClick={() => setMenuActive(false)}>Admin Dashboard</Link>
-              <button onClick={handleLogout} className="navbar-button">Logout</button>
+              <li className="nav-item">
+                <Link to="/admin/dashboard" className="nav-link admin-link" onClick={() => setIsOpen(false)}>
+                  Admin Dashboard
+                </Link>
+              </li>
+              <li className="nav-item">
+                <button className="logout-btn" onClick={handleLogout}>
+                  Logout
+                </button>
+              </li>
             </>
           ) : (
-            <Link to="/login" className="navbar-button" onClick={() => setMenuActive(false)}>Admin Login</Link>
+            <li className="nav-item">
+              <Link to="/login" className="nav-link login-link" onClick={() => setIsOpen(false)}>
+                Login
+              </Link>
+            </li>
           )}
-        </div>
+        </ul>
       </div>
     </nav>
   );

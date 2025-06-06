@@ -13,6 +13,8 @@ const FeedbackManagement = () => {
   const [loading, setLoading] = useState(true);
   const [selectedFaculty, setSelectedFaculty] = useState('all');
   const [selectedDepartment, setSelectedDepartment] = useState('all');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const [facultyList, setFacultyList] = useState([]);
   const [showConfirmReset, setShowConfirmReset] = useState(false);
   const [activeTab, setActiveTab] = useState('responses');
@@ -100,11 +102,22 @@ const FeedbackManagement = () => {
     localStorage.setItem('facultySubjectMappings', JSON.stringify(facultySubjectMappings));
   }, [facultySubjectMappings]);
 
-  // Filter feedback by selected faculty and department
+  // Filter feedback by selected faculty, department, and date range
   const filteredFeedback = feedback.filter(item => {
     const facultyMatch = selectedFaculty === 'all' || item.facultyName === selectedFaculty;
     const departmentMatch = selectedDepartment === 'all' || item.department === selectedDepartment;
-    return facultyMatch && departmentMatch;
+    
+    // Date filtering
+    let dateMatch = true;
+    if (startDate && endDate) {
+      const feedbackDate = new Date(item.timestamp);
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      end.setHours(23, 59, 59); // Include the entire end day
+      dateMatch = feedbackDate >= start && feedbackDate <= end;
+    }
+    
+    return facultyMatch && departmentMatch && dateMatch;
   });
 
   // Calculate average ratings
@@ -221,9 +234,36 @@ const FeedbackManagement = () => {
 
   // Export to Excel
   const exportToExcel = () => {
-    const worksheet = XLSX.utils.json_to_sheet(filteredFeedback);
+    // Create a new workbook
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Feedback');
+    
+    // Add header information to a separate sheet
+    const headerData = [
+      ['SRI SHANMUGHA COLLEGE OF ENGINEERING AND TECHNOLOGY'],
+      ['ECE DEPARTMENT'],
+      [''],
+      ['Feedback Summary Report'],
+      [''],
+      [`Department: ${selectedDepartment === 'all' ? 'All Departments' : selectedDepartment}`],
+      [`Faculty: ${selectedFaculty === 'all' ? 'All Faculty' : selectedFaculty}`],
+      [''],
+      [`Total Responses: ${filteredFeedback.length}`],
+      [''],
+      ['Average Ratings:'],
+      [`Teaching: ${averages.teaching}/5`],
+      [`Content: ${averages.content}/5`],
+      [`Interaction: ${averages.interaction}/5`],
+      [`Overall: ${averages.overall}/5`],
+      [''],
+      [`Generated on: ${new Date().toLocaleDateString()}`]
+    ];
+    
+    const headerSheet = XLSX.utils.aoa_to_sheet(headerData);
+    XLSX.utils.book_append_sheet(workbook, headerSheet, 'Summary');
+    
+    // Add feedback data to another sheet
+    const worksheet = XLSX.utils.json_to_sheet(filteredFeedback);
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Feedback Data');
     
     const fileName = `feedback_data_${selectedDepartment === 'all' ? 'all_departments' : selectedDepartment}_${selectedFaculty === 'all' ? 'all_faculty' : selectedFaculty}.xlsx`;
     XLSX.writeFile(workbook, fileName);
@@ -233,20 +273,35 @@ const FeedbackManagement = () => {
   const exportToPDF = () => {
     const doc = new jsPDF();
     
-    doc.setFontSize(18);
-    doc.text('Feedback Summary Report', 20, 20);
+    // Add college and department header
+    doc.setFontSize(16);
+    doc.setFont('helvetica', 'bold');
+    doc.text('SRI SHANMUGHA COLLEGE OF ENGINEERING AND TECHNOLOGY', 105, 20, { align: 'center' });
+    doc.setFontSize(14);
+    doc.text('ECE DEPARTMENT', 105, 30, { align: 'center' });
+    
+    // Add a line
+    doc.setLineWidth(0.5);
+    doc.line(20, 35, 190, 35);
     
     doc.setFontSize(14);
-    doc.text(`Department: ${selectedDepartment === 'all' ? 'All Departments' : selectedDepartment}`, 20, 30);
-    doc.text(`Faculty: ${selectedFaculty === 'all' ? 'All Faculty' : selectedFaculty}`, 20, 40);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Feedback Summary Report', 105, 45, { align: 'center' });
     
     doc.setFontSize(12);
-    doc.text(`Total Responses: ${filteredFeedback.length}`, 20, 50);
-    doc.text(`Average Ratings:`, 20, 60);
-    doc.text(`- Teaching: ${averages.teaching}`, 30, 70);
-    doc.text(`- Content: ${averages.content}`, 30, 80);
-    doc.text(`- Interaction: ${averages.interaction}`, 30, 90);
-    doc.text(`- Overall: ${averages.overall}`, 30, 100);
+    doc.text(`Department: ${selectedDepartment === 'all' ? 'All Departments' : selectedDepartment}`, 20, 60);
+    doc.text(`Faculty: ${selectedFaculty === 'all' ? 'All Faculty' : selectedFaculty}`, 20, 70);
+    
+    doc.text(`Total Responses: ${filteredFeedback.length}`, 20, 85);
+    doc.text(`Average Ratings:`, 20, 95);
+    doc.text(`- Teaching: ${averages.teaching}/5`, 30, 105);
+    doc.text(`- Content: ${averages.content}/5`, 30, 115);
+    doc.text(`- Interaction: ${averages.interaction}/5`, 30, 125);
+    doc.text(`- Overall: ${averages.overall}/5`, 30, 135);
+    
+    // Add date
+    const today = new Date();
+    doc.text(`Generated on: ${today.toLocaleDateString()}`, 20, 150);
     
     const fileName = `feedback_report_${selectedDepartment === 'all' ? 'all_departments' : selectedDepartment}_${selectedFaculty === 'all' ? 'all_faculty' : selectedFaculty}.pdf`;
     doc.save(fileName);
@@ -367,6 +422,28 @@ const FeedbackManagement = () => {
                     <option key={index} value={faculty}>{faculty}</option>
                   ))}
                 </select>
+              </div>
+              
+              <div className="filter-group">
+                <label htmlFor="startDate" className="form-label">From:</label>
+                <input
+                  type="date"
+                  id="startDate"
+                  className="form-control"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </div>
+
+              <div className="filter-group">
+                <label htmlFor="endDate" className="form-label">To:</label>
+                <input
+                  type="date"
+                  id="endDate"
+                  className="form-control"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
               </div>
               
               <button className="btn refresh-btn" onClick={handleRefresh}>
