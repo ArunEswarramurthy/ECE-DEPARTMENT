@@ -10,8 +10,16 @@ const Navbar = () => {
 
   useEffect(() => {
     // Check if user is logged in as admin
-    const adminStatus = localStorage.getItem('isAdmin') === 'true';
-    setIsAdmin(adminStatus);
+    const checkAdminStatus = () => {
+      const adminStatus = localStorage.getItem('isAdmin') === 'true';
+      setIsAdmin(adminStatus);
+    };
+    
+    // Initial check
+    checkAdminStatus();
+    
+    // Set up event listener for storage changes
+    window.addEventListener('storage', checkAdminStatus);
     
     // Load site name from localStorage if available
     const storedName = localStorage.getItem('siteName');
@@ -24,6 +32,11 @@ const Navbar = () => {
     if (storedLogo) {
       setLogo(storedLogo);
     }
+    
+    // Clean up event listener
+    return () => {
+      window.removeEventListener('storage', checkAdminStatus);
+    };
   }, []);
 
   const toggleMenu = () => {
@@ -35,6 +48,8 @@ const Navbar = () => {
     setIsAdmin(false);
     // Close menu after logout
     setIsOpen(false);
+    // Trigger storage event for other tabs
+    window.dispatchEvent(new Event('storage'));
   };
 
   return (
@@ -79,19 +94,19 @@ const Navbar = () => {
               Achievements
             </Link>
           </li>
+          {isAdmin && (
+            <li className="nav-item">
+              <Link to="/admin/dashboard" className="nav-link admin-link" onClick={() => setIsOpen(false)}>
+                Admin Dashboard
+              </Link>
+            </li>
+          )}
           {isAdmin ? (
-            <>
-              <li className="nav-item">
-                <Link to="/admin/dashboard" className="nav-link admin-link" onClick={() => setIsOpen(false)}>
-                  Admin Dashboard
-                </Link>
-              </li>
-              <li className="nav-item">
-                <button className="logout-btn" onClick={handleLogout}>
-                  Logout
-                </button>
-              </li>
-            </>
+            <li className="nav-item">
+              <button className="logout-btn" onClick={handleLogout}>
+                Logout
+              </button>
+            </li>
           ) : (
             <li className="nav-item">
               <Link to="/login" className="nav-link login-link" onClick={() => setIsOpen(false)}>

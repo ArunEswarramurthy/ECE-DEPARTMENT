@@ -232,12 +232,12 @@ const FeedbackManagement = () => {
     maintainAspectRatio: false
   };
 
-  // Export to Excel
+  // Export Summary to Excel
   const exportToExcel = () => {
     // Create a new workbook
     const workbook = XLSX.utils.book_new();
     
-    // Add header information to a separate sheet
+    // Add header information to the sheet
     const headerData = [
       ['SRI SHANMUGHA COLLEGE OF ENGINEERING AND TECHNOLOGY'],
       ['ECE DEPARTMENT'],
@@ -258,14 +258,51 @@ const FeedbackManagement = () => {
       [`Generated on: ${new Date().toLocaleDateString()}`]
     ];
     
-    const headerSheet = XLSX.utils.aoa_to_sheet(headerData);
-    XLSX.utils.book_append_sheet(workbook, headerSheet, 'Summary');
+    const sheet = XLSX.utils.aoa_to_sheet(headerData);
+    XLSX.utils.book_append_sheet(workbook, sheet, 'Summary');
     
-    // Add feedback data to another sheet
-    const worksheet = XLSX.utils.json_to_sheet(filteredFeedback);
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Feedback Data');
+    const fileName = `feedback_summary_${selectedDepartment === 'all' ? 'all_departments' : selectedDepartment}_${selectedFaculty === 'all' ? 'all_faculty' : selectedFaculty}.xlsx`;
+    XLSX.writeFile(workbook, fileName);
+  };
+  
+  // Export Full Responses to Excel
+  const exportFullResponses = () => {
+    // Create a new workbook
+    const workbook = XLSX.utils.book_new();
     
-    const fileName = `feedback_data_${selectedDepartment === 'all' ? 'all_departments' : selectedDepartment}_${selectedFaculty === 'all' ? 'all_faculty' : selectedFaculty}.xlsx`;
+    // Format the individual feedback data with serial numbers
+    const formattedFeedback = filteredFeedback.map((item, index) => ({
+      'S.NO': index + 1,
+      'REGISTRATION NUMBER': parseInt(item.registerNumber) || 'N/A',
+      'DEPARTMENT': item.department || 'N/A',
+      'FACULTY NAME': item.facultyName || 'N/A',
+      'SUBJECT': item.subject || 'N/A',
+      'QUESTION 1 (TEACHING)': item.teachingRating || 'N/A',
+      'QUESTION 2 (CONTENT)': item.contentRating || 'N/A',
+      'QUESTION 3 (INTERACTION)': item.interactionRating || 'N/A',
+      'QUESTION 4 (OVERALL)': item.overallRating || 'N/A',
+      'COMMENTS': item.comments || '-'
+    }));
+    
+    // Add header information
+    const headerData = [
+      ['SRI SHANMUGHA COLLEGE OF ENGINEERING AND TECHNOLOGY'],
+      ['ECE DEPARTMENT'],
+      ['FEEDBACK RESPONSES'],
+      [`Department: ${selectedDepartment === 'all' ? 'All Departments' : selectedDepartment}`],
+      [`Faculty: ${selectedFaculty === 'all' ? 'All Faculty' : selectedFaculty}`],
+      [`Generated on: ${new Date().toLocaleDateString()}`],
+      ['']
+    ];
+    
+    const sheet = XLSX.utils.aoa_to_sheet(headerData);
+    
+    // Add the data starting from row 8
+    XLSX.utils.sheet_add_json(sheet, formattedFeedback, { origin: 'A8' });
+    
+    XLSX.utils.book_append_sheet(workbook, sheet, 'Full Responses');
+    
+    const fileName = `feedback_full_responses_${selectedDepartment === 'all' ? 'all_departments' : selectedDepartment}_${selectedFaculty === 'all' ? 'all_faculty' : selectedFaculty}.xlsx`;
     XLSX.writeFile(workbook, fileName);
   };
 
@@ -480,7 +517,14 @@ const FeedbackManagement = () => {
                   onClick={exportToExcel}
                   disabled={filteredFeedback.length === 0}
                 >
-                  Export to Excel
+                  Download Summary
+                </button>
+                <button 
+                  className="btn" 
+                  onClick={exportFullResponses}
+                  disabled={filteredFeedback.length === 0}
+                >
+                  Download Full Responses
                 </button>
                 <button 
                   className="btn" 

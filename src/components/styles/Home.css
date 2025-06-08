@@ -1,85 +1,153 @@
+/* Modern Teal Theme Home Styling with Orange Buttons */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-teal: #29B7A7;
+  --dark-teal: #17252A;
+  --aqua-blue: #3AAFA9;
+  --light-gray-blue: #DEF2F1;
+  --white: #FEFFFF;
+  --shadow: 0 10px 30px rgba(41, 183, 167, 0.15);
+  --gradient: linear-gradient(135deg, #29B7A7, #3AAFA9);
+  
+  /* Orange Button Theme */
+  --orange-base: #F97316;
+  --orange-hover: #EA580C;
+  --button-text: #FFFFFF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--light-gray-blue);
+  color: var(--dark-teal);
+}
+
 .home-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 2rem 1rem;
 }
 
+/* Welcome Section Styling */
 .welcome-section {
-  background: linear-gradient(135deg, #17252A, #2B7A78, #3AAFA9);
-  color: white;
-  padding: 4rem 2rem;
-  border-radius: 15px;
   text-align: center;
-  margin-bottom: 3rem;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #2aa8a1, #237a80); /* diagonal teal gradient */
+  border-radius: 12px; /* rounded corners */
+  margin-bottom: 4rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* subtle shadow */
   position: relative;
   overflow: hidden;
+  animation: fadeIn 1s ease-out;
 }
 
 .welcome-section::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.05)" points="0,100 100,0 100,100"/></svg>');
-  background-size: cover;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  animation: rotate 30s linear infinite;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .logo-container {
   margin-bottom: 2rem;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: var(--dark-teal);
+  border: 5px solid var(--white);
+  overflow: hidden;
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 10px 30px rgba(23, 37, 42, 0.2);
+  animation: pulse 2s infinite;
+  position: relative;
+  z-index: 2;
 }
 
 .department-logo {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 5px solid white;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  background: white;
-  padding: 10px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
 .welcome-section h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  color: var(--white);
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
   position: relative;
+  z-index: 2;
+  animation: slideUp 1s ease-out;
+  text-shadow: 0 2px 5px rgba(23, 37, 42, 0.2);
+}
+
+.welcome-section h2 {
+  color: var(--light-gray-blue);
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
+  animation: slideUp 1s ease-out 0.2s;
+  animation-fill-mode: both;
+  text-shadow: 0 2px 5px rgba(23, 37, 42, 0.2);
 }
 
 .welcome-section p {
+  color: var(--white);
   font-size: 1.2rem;
   max-width: 700px;
   margin: 0 auto;
   position: relative;
+  z-index: 2;
+  animation: slideUp 1s ease-out 0.4s;
+  animation-fill-mode: both;
 }
 
+/* Features Section Styling */
 .features-section {
-  margin-bottom: 3rem;
+  padding: 2rem 0;
 }
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
 }
 
 .feature-card {
-  background: white;
+  background: var(--white);
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(23, 37, 42, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   position: relative;
-  z-index: 1;
+  top: 0;
+  animation: fadeIn 0.8s ease-out;
+  animation-fill-mode: both;
 }
 
 .feature-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-15px);
+  box-shadow: 0 20px 40px rgba(41, 183, 167, 0.2);
 }
 
 .feature-card::before {
@@ -89,59 +157,146 @@
   left: 0;
   width: 100%;
   height: 5px;
-  z-index: 2;
+  background: var(--primary-teal);
+  transition: height 0.3s ease;
 }
 
-.feature-card:nth-child(1)::before {
-  background: #2B7A78;
-}
-
-.feature-card:nth-child(2)::before {
-  background: #3AAFA9;
-}
-
-.feature-card:nth-child(3)::before {
-  background: #007BFF;
-}
-
-.feature-card:nth-child(4)::before {
-  background: #FFA500;
+.feature-card:hover::before {
+  height: 10px;
 }
 
 .feature-content {
-  padding: 2rem;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.feature-card h3 {
-  color: #17252A;
+.feature-content h3 {
+  color: var(--dark-teal);
   font-size: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
+  position: relative;
+  padding-bottom: 0.8rem;
+  font-weight: 600;
 }
 
-.feature-card p {
-  color: #333333;
-  margin-bottom: 1.5rem;
+.feature-content h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--aqua-blue);
+  transition: width 0.3s ease;
+}
+
+.feature-card:hover .feature-content h3::after {
+  width: 100px;
+}
+
+.feature-content p {
+  color: #555;
+  margin-bottom: 1.8rem;
+  flex-grow: 1;
   line-height: 1.6;
 }
 
 .feature-btn {
   display: inline-block;
-  padding: 0.8rem 1.5rem;
+  background: #F97316; /* Orange Base */
+  color: #FFFFFF;
+  padding: 0.8rem 2rem;
   border-radius: 30px;
   text-decoration: none;
-  font-weight: bold;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background: #FFA500;
-  color: white;
-  box-shadow: 0 4px 10px rgba(255, 165, 0, 0.3);
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.feature-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #EA580C; /* Orange Hover */
+  transition: width 0.3s ease;
+  z-index: -1;
 }
 
 .feature-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(255, 165, 0, 0.4);
+  box-shadow: 0 5px 15px rgba(249, 115, 22, 0.4);
 }
 
-/* Responsive adjustments */
+.feature-btn:hover::before {
+  width: 100%;
+}
+
+/* All buttons use the same orange theme */
+.feature-card:nth-child(1) .feature-btn,
+.feature-card:nth-child(2) .feature-btn,
+.feature-card:nth-child(3) .feature-btn,
+.feature-card:nth-child(4) .feature-btn {
+  background: #F97316; /* Orange Base */
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Staggered animation for cards */
+.features-grid .feature-card:nth-child(1) { animation-delay: 0.1s; }
+.features-grid .feature-card:nth-child(2) { animation-delay: 0.3s; }
+.features-grid .feature-card:nth-child(3) { animation-delay: 0.5s; }
+.features-grid .feature-card:nth-child(4) { animation-delay: 0.7s; }
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .welcome-section {
     padding: 3rem 1.5rem;
@@ -151,16 +306,24 @@
     font-size: 2.2rem;
   }
   
+  .welcome-section h2 {
+    font-size: 1.3rem;
+  }
+  
   .welcome-section p {
     font-size: 1rem;
+  }
+  
+  .logo-container {
+    width: 140px;
+    height: 140px;
   }
   
   .features-grid {
     grid-template-columns: 1fr;
   }
   
-  .department-logo {
-    width: 120px;
-    height: 120px;
+  .feature-content {
+    padding: 2rem 1.5rem;
   }
 }

@@ -74,6 +74,11 @@ const FeedbackForm = () => {
     // In a real application, this would verify against a database
     // For now, we'll just accept any non-empty register number and department
     if (registerNumber.trim() !== '' && department !== '') {
+      // Validate that register number is numeric
+      if (!/^\d+$/.test(registerNumber.trim())) {
+        alert("Please enter a valid numeric register number");
+        return;
+      }
       setIsVerified(true);
     } else {
       alert("Please enter your register number and select your department");

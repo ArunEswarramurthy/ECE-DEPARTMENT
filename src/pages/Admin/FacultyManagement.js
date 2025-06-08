@@ -199,18 +199,7 @@ const FacultyManagement = () => {
     saveFacultyData(updatedFaculty);
   };
 
-  // Format subjects for display
-  const formatSubjects = (subjects) => {
-    if (!subjects) return "N/A";
-    
-    if (Array.isArray(subjects)) {
-      return subjects.map(subject => 
-        `${subject.courseCode}: ${subject.subjectName}`
-      ).join(", ");
-    }
-    
-    return subjects;
-  };
+  // This function was unused and has been removed
 
   return (
     <div className="faculty-management">

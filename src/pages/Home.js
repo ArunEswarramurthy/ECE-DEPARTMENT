@@ -27,7 +27,8 @@ const Home = () => {
         <div className="logo-container">
           <img src={logo} alt="Department Logo" className="department-logo" />
         </div>
-        <h1>Welcome to {siteName}</h1>
+        <h1>Welcome to ECE DEPARTMENT</h1>
+        <h2>SRI SHANMUGHA COLLEGE OF ENGINEERING AND TECHNOLOGY</h2>
         <p>Your gateway to academic excellence and innovation</p>
       </div>
       

@@ -1,3 +1,6 @@
+/* Modern Faculty Styling with Clean UI */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 .faculty-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -80,6 +83,8 @@
   background: linear-gradient(135deg, #2B7A78, #3AAFA9);
   position: relative;
   flex-shrink: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .faculty-image {
@@ -95,13 +100,17 @@
   transform: translateX(-50%);
   background: white;
   z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .faculty-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
+  display: block;
 }
 
 .faculty-info {
@@ -113,6 +122,8 @@
 }
 
 .faculty-designation {
+  position: relative;
+  top: 40px;
   color: #3AAFA9;
   font-weight: 600;
   margin-bottom: 0.5rem;
@@ -125,6 +136,8 @@
 }
 
 .faculty-name-display {
+  position: relative;
+  top: 40px;
   color: #17252A;
   font-size: 1.5rem;
   font-weight: bold;
@@ -133,6 +146,9 @@
 }
 
 .faculty-contact-info {
+  position: relative;
+  top: 40px;
+
   display: flex;
   justify-content: center;
   gap: 1rem;
@@ -147,6 +163,8 @@
 }
 
 .faculty-details {
+  position: relative;
+  top: 40px;
   text-align: left;
   margin: 0 auto 1rem;
   flex-grow: 1;
@@ -332,4 +350,110 @@
 
 .empty-state p {
   font-size: 1.2rem;
+}
+
+/* For compatibility with existing structure */
+.faculty-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.faculty-detail-icon {
+  color: #3AAFA9;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.faculty-detail-content {
+  flex: 1;
+}
+
+.faculty-detail-label {
+  color: #17252A;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.faculty-detail-value {
+  color: #333333;
+  font-size: 0.9rem;
+}
+
+.courses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.course-item {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px dashed #DEF2F1;
+}
+
+.course-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.course-code {
+  font-weight: 600;
+  color: #2B7A78;
+  font-size: 0.85rem;
+}
+
+.course-name {
+  font-size: 0.85rem;
+  color: #333333;
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid #eee;
+}
+
+.contact-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  background-color: rgba(58, 175, 169, 0.1);
+  color: #333333;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contact-icon:hover {
+  background-color: rgba(58, 175, 169, 0.2);
+}
+
+.icon {
+  color: #3AAFA9;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.faculty-image-container {
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(135deg, #2B7A78, #3AAFA9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }

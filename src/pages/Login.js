@@ -14,6 +14,8 @@ const Login = () => {
     // Check credentials
     if (adminId === '732722106004' && password === 'E22EC018') {
       localStorage.setItem('isAdmin', 'true');
+      // Trigger storage event to update navbar
+      window.dispatchEvent(new Event('storage'));
       navigate('/admin/dashboard');
     } else {
       setError('Invalid credentials. Please try again.');
