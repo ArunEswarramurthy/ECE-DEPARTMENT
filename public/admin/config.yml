@@ -1,0 +1,19 @@
+backend:
+  name: github
+  repo: ArunEswarramurthy/DEPARTMENT-ECE
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "faculty"
+    label: "Faculty"
+    folder: "src/data/faculty"
+    create: true
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }

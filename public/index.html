@@ -15,6 +15,7 @@
     <!-- Add Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <title>ECE Department Portal</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script>
       // Check if a custom logo exists in localStorage and use it as favicon
       window.onload = function() {
@@ -45,4 +46,15 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 </html>
